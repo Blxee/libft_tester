@@ -1,0 +1,5 @@
+test.out
+leak.out
+*.o
+libft/libft.a
+libft/*.o
