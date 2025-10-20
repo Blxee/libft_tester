@@ -1,6 +1,6 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
-LIB_DIR = ./libft
+CFLAGS = -g
+LIB_DIR = libft/
 BIN_NAME = test.out
 SRCS = test.c
 OBJS = $(SRCS:.c=.o)
@@ -13,14 +13,14 @@ all: test
 test: $(BIN_NAME)
 	./$(BIN_NAME)
 
-$(BIN_NAME): $(SRCS) libft
-	$(CC) $^ -o $@ -g -lbsd -L$(LIB_DIR) -lft
+$(BIN_NAME): $(OBJS) libft
+	$(CC) $(OBJS) -o $@ $(CFLAGS) -lbsd -L$(LIB_DIR) -lft
 
 leak: $(BIN_LEAK)
 	./$(BIN_LEAK)
 
 $(BIN_LEAK): $(LEAK_OBJS) libft
-	$(CC) $^ -o $@ -g -L$(LIB_DIR) -lft
+	$(CC) $(LEAK_OBJS) -o $@ $(CFLAGS) -L$(LIB_DIR) -lft
 
 libft:
 	$(MAKE) -C $(LIB_DIR) bonus
@@ -29,11 +29,11 @@ libft:
 	$(CC) -c $(CFLAGS) $< -o $@
 
 clean:
-	rm -f $(OBJS) $(BONUS_OBJS)
+	rm -f $(OBJS)
 	$(MAKE) -C $(LIB_DIR) clean
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(BIN_NAME) $(LEAK_BIN)
 	$(MAKE) -C $(LIB_DIR) fclean
 
 re: fclean all
