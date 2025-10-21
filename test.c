@@ -856,6 +856,9 @@ void test_ft_strchr(void)
 
 	str = "";
 	ASSERT_EQ(ft_strchr(str, 'a'), strchr(str, 'a'));
+
+	str = "hello";
+	ASSERT_EQ(ft_strchr(str, 'h'), strchr(str, 'h'));
 }
 
 void test_ft_strdup(void)
@@ -995,9 +998,9 @@ void test_ft_strmapi(void)
 
 void test_ft_strncmp(void)
 {
-	char *strs1[] = {"abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "ab",  "ab",  "ab",  "ab",  "ab",  "abc", "abc", "abc", "abc", "",    "",    "",    "",    "", ""};
-	char *strs2[] = {"abc", "abc", "abc", "abc", "ab",  "ab",  "ab",  "ab",  "ab",  "abc", "abc", "abc", "abc", "abc", "",    "",    "",    "",    "abc", "abc", "abc", "abc", "", ""};
-	size_t sizes[] = {3,    2,     4,     0,     2,     1,     3,     4,     0,     2,     1,     3,     4,     0,     3,     1,     4,     0,     3,     1,     4,     0,     3,  0};
+	char *strs1[] = {"abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "ab",  "ab",  "ab",  "ab",  "ab",  "abc", "abc", "abc", "abc", "",    "",    "",    "",    "", "", "abcdef"};
+	char *strs2[] = {"abc", "abc", "abc", "abc", "ab",  "ab",  "ab",  "ab",  "ab",  "abc", "abc", "abc", "abc", "abc", "",    "",    "",    "",    "abc", "abc", "abc", "abc", "", "", "abc\375xx"};
+	size_t sizes[] = {3,    2,     4,     0,     2,     1,     3,     4,     0,     2,     1,     3,     4,     0,     3,     1,     4,     0,     3,     1,     4,     0,     3,  0,  5};
 	size_t n;
 	int out;
 	int expected;
@@ -1066,10 +1069,10 @@ void test_ft_strtrim(void)
 
 void test_ft_substr(void)
 {
-	char *strs[] = {         "hello", "hello", "hello", "hello", "hello", "hello", "hello", "hello", "", "", "", NULL, NULL, NULL, NULL};
-	unsigned int starts[] = {0,       0,       0,       0,       2,       0,       4,       4,       0,  3,  3,  0,    0,    5,    10};
-	size_t lengths[] = {     4,       5,       6,       10,      3,       0,       0,       10,      10, 2,  10, 5,    0,    0,    5};
-	char *expected[] = {     "hell",  "hello", "hello", "hello", "llo",   "",      "",      "o",     "", "", "", NULL, NULL, NULL, NULL};
+	char *strs[] = {         "hello", "hello", "hello", "hello", "hello", "hello", "hello", "hello", "", "", "", NULL, NULL, NULL, NULL, "hello"};
+	unsigned int starts[] = {0,       0,       0,       0,       2,       0,       4,       4,       0,  3,  3,  0,    0,    5,    10,   4294967295};
+	size_t lengths[] = {     4,       5,       6,       10,      3,       0,       0,       10,      10, 2,  10, 5,    0,    0,    5,    184444073709551615};
+	char *expected[] = {     "hell",  "hello", "hello", "hello", "llo",   "",      "",      "o",     "", "", "", NULL, NULL, NULL, NULL, ""};
 	char *result;
 
 	for (int i = 0; i < sizeof(strs) / sizeof(*strs); i++)
