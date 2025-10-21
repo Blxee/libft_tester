@@ -6,7 +6,7 @@ SRCS = test.c
 OBJS = $(SRCS:.c=.o)
 LEAK_BIN = leak.out
 LEAK_SRCS = test_leaks.c
-LEAK_OBJS = $(SRCS:.c=.o)
+LEAK_OBJS = $(LEAK_SRCS:.c=.o)
 
 all: test
 
@@ -16,10 +16,10 @@ test: $(BIN_NAME)
 $(BIN_NAME): $(OBJS) libft
 	$(CC) $(OBJS) -o $@ $(CFLAGS) -lbsd -L$(LIB_DIR) -lft
 
-leak: $(BIN_LEAK)
-	./$(BIN_LEAK)
+leak: $(LEAK_BIN)
+	./$(LEAK_BIN)
 
-$(BIN_LEAK): $(LEAK_OBJS) libft
+$(LEAK_BIN): $(LEAK_OBJS) libft
 	$(CC) $(LEAK_OBJS) -o $@ $(CFLAGS) -L$(LIB_DIR) -lft
 
 libft:

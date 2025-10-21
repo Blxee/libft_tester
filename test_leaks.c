@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "libft/libft.h"
 
 static char strmap_foo(unsigned int i, char c) { return c; }
 

@@ -1069,10 +1069,10 @@ void test_ft_strtrim(void)
 
 void test_ft_substr(void)
 {
-	char *strs[] = {         "hello", "hello", "hello", "hello", "hello", "hello", "hello", "hello", "", "", "", NULL, NULL, NULL, NULL, "hello"};
-	unsigned int starts[] = {0,       0,       0,       0,       2,       0,       4,       4,       0,  3,  3,  0,    0,    5,    10,   4294967295};
-	size_t lengths[] = {     4,       5,       6,       10,      3,       0,       0,       10,      10, 2,  10, 5,    0,    0,    5,    184444073709551615};
-	char *expected[] = {     "hell",  "hello", "hello", "hello", "llo",   "",      "",      "o",     "", "", "", NULL, NULL, NULL, NULL, ""};
+	char *strs[] = {         "hello", "hello", "hello", "hello", "hello", "hello", "hello", "helo", "helo", "helo", "hello", "", "", "", NULL, NULL, NULL, NULL, "hello"};
+	unsigned int starts[] = {0,       0,       0,       0,       2,       0,       4,       2,      3,      3,       4,       0,  3,  3,  0,    0,    5,    10,   4294967295};
+	size_t lengths[] = {     4,       5,       6,       10,      3,       0,       0,       1,      1,      2,       10,      10, 2,  10, 5,    0,    0,    5,    184444073709551615};
+	char *expected[] = {     "hell",  "hello", "hello", "hello", "llo",   "",      "",      "l",    "o",    "o",     "o",     "", "", "", NULL, NULL, NULL, NULL, ""};
 	char *result;
 
 	for (int i = 0; i < sizeof(strs) / sizeof(*strs); i++)
