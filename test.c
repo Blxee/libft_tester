@@ -995,39 +995,19 @@ void test_ft_strmapi(void)
 
 void test_ft_strncmp(void)
 {
-	char *str1;
-	char *str2;
+	char *strs1[] = {"abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "ab",  "ab",  "ab",  "ab",  "ab",  "abc", "abc", "abc", "abc", "",    "",    "",    "",    "", ""};
+	char *strs2[] = {"abc", "abc", "abc", "abc", "ab",  "ab",  "ab",  "ab",  "ab",  "abc", "abc", "abc", "abc", "abc", "",    "",    "",    "",    "abc", "abc", "abc", "abc", "", ""};
+	size_t sizes[] = {3,    2,     4,     0,     2,     1,     3,     4,     0,     2,     1,     3,     4,     0,     3,     1,     4,     0,     3,     1,     4,     0,     3,  0};
 	size_t n;
 	int out;
 	int expected;
 
-	str1 = "abc";
-	str2 = "abc";
-	n = 3;
-	out = ft_strncmp(str1, str2, n);
-	expected = strncmp(str1, str2, n);
-	ASSERT_EQ(out, expected);
-
-	str1 = "abcdef";
-	str2 = "abcDEF";
-	n = 3;
-	out = ft_strncmp(str1, str2, n);
-	expected = strncmp(str1, str2, n);
-	ASSERT_EQ(out, expected);
-
-	str1 = "abc";
-	str2 = "abc";
-	n = 6;
-	out = ft_strncmp(str1, str2, n);
-	expected = strncmp(str1, str2, n);
-	ASSERT_EQ(out, expected);
-
-	str1 = "abc";
-	str2 = "abC";
-	n = 3;
-	out = ft_strncmp(str1, str2, n);
-	expected = strncmp(str1, str2, n);
-	ASSERT_EQ(out, expected);
+	for (int i = 0; i < sizeof(strs1) / sizeof(*strs1); i++)
+	{
+		out = ft_strncmp(strs1[i], strs2[i], sizes[i]);
+		expected = strncmp(strs1[i], strs2[i], sizes[i]);
+		ASSERT_EQ(out, expected);
+	}
 }
 
 void test_ft_strnstr(void)
@@ -1036,14 +1016,6 @@ void test_ft_strnstr(void)
 	char *needles[] =   {"he",    "hello", "llo",   "",      "zzz",   "zhel",  "helloz", "helz",  "zhello", "he",    "hello", "llo",   "",      "zzz",   "zhel",  "helloz", "helz",  "zhello", "he",    "hello", "llo",   "",      "zzz",   "zhel",     "helloz", "helz",  "zhello", "", "", "hey", "hey", "hey", "hey", "",   ""};
 	size_t sizes[] =    {5,       5,       5,       5,       5,       5,       5,        5,       5,        3,       3,       3,       3,       3,       3,       3,        3,       3,        10,      10,      10,      10,      10,      10,         10,       10,      10,       0,  5,  0,     3,     5,     0,     5,    0};
 
-	// strnstr("", NULL, 1); // seg
-	// strnstr("", NULL, 0); // seg
-	// strnstr(NULL, "", 1); // good
-	// strnstr(NULL, "", 0); // good
-	// strnstr(NULL, NULL, 1); // seg
-	// strnstr(NULL, NULL, 0); // seg
-	// ft_strnstr(NULL, "hey", 5); // seg
-	// strnstr(NULL, "hey", 0); // good
 	for (int i = 0; i < sizeof(haystacks) / sizeof(*haystacks); i++)
 	{
 		TEST_INFO(i);
